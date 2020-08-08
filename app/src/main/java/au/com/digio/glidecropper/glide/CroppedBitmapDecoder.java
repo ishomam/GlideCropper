@@ -85,7 +85,7 @@ public class CroppedBitmapDecoder implements ResourceDecoder<CroppedImageDecoder
         if(desCroppedWidth == croppedWidth){
             desCroppedHeight = croppedHeight;
         }
-        desCroppedHeight = (int) (((float) desCroppedWidth / croppedWidth) * croppedHeight);
+        desCroppedHeight = (int) (((float) croppedHeight / croppedWidth) * desCroppedWidth);
 
         if (desCroppedWidth > imageWidth) {
             desCroppedWidth = imageWidth;
