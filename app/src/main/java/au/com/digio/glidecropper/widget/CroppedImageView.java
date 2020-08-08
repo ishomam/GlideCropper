@@ -2,8 +2,10 @@ package au.com.digio.glidecropper.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.util.AttributeSet;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +19,7 @@ public class CroppedImageView extends AppCompatImageView {
     private int horizontalOffset = 0;
     private int verticalOffset = 0;
     private int resId = 0;
+    private Uri uri;
     private boolean loadRequested = false;
 
     public CroppedImageView(Context context) {
@@ -34,25 +37,25 @@ public class CroppedImageView extends AppCompatImageView {
         ats.recycle();
     }
 
-    public CroppedImageView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-
-        this.context = context;
-        setScaleType(ScaleType.FIT_XY);
-        TypedArray ats = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CroppedImageView, 0, 0);
-        horizontalOffset = ats.getDimensionPixelOffset(R.styleable.CroppedImageView_horizontalOffset, 0);
-        verticalOffset = ats.getDimensionPixelOffset(R.styleable.CroppedImageView_verticalOffset, 0);
-        ats.recycle();
-    }
-
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (resId != 0) {
+        if (uri != null) {
             loadCroppedImage();
         }
     }
 
+    @Override
+    public void setImageURI(@Nullable Uri uri) {
+        this.uri = uri;
+        loadRequested = false;
+        if (getHeight() != 0 && getWidth() != 0) {
+            loadCroppedImage();
+        }
+    }
+
+    // This will not be used but left here in case in the future I wanted to readd this feature
+    // to the GlideApp
     @Override
     public void setImageResource(int resId) {
         this.resId = resId;
@@ -63,12 +66,12 @@ public class CroppedImageView extends AppCompatImageView {
     }
 
     private void loadCroppedImage() {
-        if (resId == 0 || loadRequested){
+        if (uri == null || loadRequested){
             return;
         }
         loadRequested = true; // Don't trigger multiple loads for the same resource
-        CroppedImage model = new CroppedImage(resId, getWidth(), getHeight(), horizontalOffset,
-                verticalOffset);
+        CroppedImage model = new CroppedImage(uri, getWidth(), getHeight(), horizontalOffset,
+                verticalOffset, getWidth());
         Glide.with(context)
                 .load(model)
                 .into(this);
