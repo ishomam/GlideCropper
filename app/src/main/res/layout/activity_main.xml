@@ -9,8 +9,8 @@
 
     <au.com.digio.glidecropper.widget.CroppedImageView
         android:id="@+id/productImage"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_marginBottom="5dp"
         android:background="@color/colorPrimary"
         app:horizontalOffset="0dp"
@@ -19,14 +19,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
-        android:id="@+id/testImage"
+    <Button
+        android:id="@+id/clearCache"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/colorAccent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="15dp"
+        android:onClick="clearCache"
+        android:text="Clear glide cache"
+        app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button"
         />
 
     <Button

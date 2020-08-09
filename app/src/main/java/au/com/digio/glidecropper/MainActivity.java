@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -32,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        GlideApp.get(this).clearMemory();
-//        GlideApp.get(this).clearDiskCache(); // Do in background
     }
 
     public void selectPhoto(View view) {
@@ -52,5 +50,16 @@ public class MainActivity extends AppCompatActivity {
             imageUri = data.getData();
             ((CroppedImageView) findViewById(R.id.productImage)).setImageURI(imageUri);
         }
+    }
+
+    public void clearCache(View view) {
+        GlideApp.get(MainActivity.this).clearMemory();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                GlideApp.get(MainActivity.this).clearDiskCache(); // Do in background
+            }
+        };
+        new Thread(runnable).start();
     }
 }
