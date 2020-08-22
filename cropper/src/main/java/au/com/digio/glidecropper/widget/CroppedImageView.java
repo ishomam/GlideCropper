@@ -4,15 +4,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.view.ViewTreeObserver;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.bumptech.glide.Glide;
 
-import au.com.digio.glidecropper.R;
 import au.com.digio.glidecropper.glide.CroppedImage;
+import au.com.digio.glidecropper.R;
 
 public class CroppedImageView extends AppCompatImageView {
 

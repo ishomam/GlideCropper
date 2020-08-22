@@ -1,21 +1,15 @@
-package au.com.digio.glidecropper;
+package au.com.digio.sample;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.IOException;
+import com.bumptech.glide.Glide;
 
-import au.com.digio.glidecropper.glide.GlideApp;
 import au.com.digio.glidecropper.widget.CroppedImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clearCache(View view) {
-        GlideApp.get(MainActivity.this).clearMemory();
+        Glide.get(MainActivity.this).clearMemory();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                GlideApp.get(MainActivity.this).clearDiskCache(); // Do in background
+                Glide.get(MainActivity.this).clearDiskCache(); // Do in background
             }
         };
         new Thread(runnable).start();

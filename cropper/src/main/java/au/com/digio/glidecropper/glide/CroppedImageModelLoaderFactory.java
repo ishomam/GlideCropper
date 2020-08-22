@@ -2,7 +2,6 @@ package au.com.digio.glidecropper.glide;
 
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
 
