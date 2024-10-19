@@ -31,7 +31,6 @@ dependencies {
     // dependencies for this Demonstration
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
-    implementation 'org.jetbrains.anko:anko-common:0.10.3'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
